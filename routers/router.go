@@ -28,5 +28,22 @@ func SetupRouter() *gin.Engine {
 	router.DELETE("/patient/:id", controllers.DeletePatient)
 	router.GET("/searchPatientByName", controllers.SearchPatientByName)
 
+	// Operating Theater Routes
+	router.POST("/operating-theater/", controllers.CreateOperatingTheater)
+	router.GET("/operating-theater/:id", controllers.GetOperatingTheaterByID)
+	router.GET("/operating-theaters/", controllers.GetAllOperatingTheaters)
+	router.GET("/operating-theaters/available", controllers.GetAvailableOperatingTheaters)
+	router.PATCH("/operating-theater/:id", controllers.UpdateOperatingTheater)
+	router.DELETE("/operating-theater/:id", controllers.DeleteOperatingTheater)
+
+	// Surgery Scheduling Routes (Transactional)
+	router.POST("/surgery/schedule", controllers.ScheduleSurgery)           // Schedule a new surgery (THE MAIN TRANSACTION)
+	router.POST("/surgery/:id/complete", controllers.CompleteSurgery)       // Mark surgery as completed
+	router.POST("/surgery/:id/cancel", controllers.CancelSurgery)           // Cancel surgery and refund deposit
+	router.GET("/surgery/:id", controllers.GetSurgeryByID)                  // Get surgery details
+	router.GET("/surgeries/", controllers.GetAllSurgeries)                  // Get all surgeries
+	router.GET("/surgeries/doctor/:doctor_id", controllers.GetSurgeriesByDoctor)   // Get surgeries by doctor
+	router.GET("/surgeries/patient/:patient_id", controllers.GetSurgeriesByPatient) // Get surgeries by patient
+
 	return router
 }

@@ -7,5 +7,10 @@ import (
 
 func InitializeDatabase() {
 	config.ConnectDatabase()
-	config.DB.AutoMigrate(&models.Doctor{}, &models.Patient{})
+	config.DB.AutoMigrate(
+		&models.Doctor{},
+		&models.Patient{},
+		&models.OperatingTheater{},
+		&models.SurgerySchedule{},
+	)
 }
