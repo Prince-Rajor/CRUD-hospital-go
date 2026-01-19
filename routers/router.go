@@ -14,13 +14,16 @@ func SetupRouter() *gin.Engine {
 	})
 
 	// Doctor Routes
+	router.GET("/doctors/", controllers.GetAllDoctors)
 	router.POST("/doctor/", controllers.CreateDoctor)
 	router.GET("/doctor/:id", controllers.GetDoctorByID)
+	router.GET("/doctor/:id/availability", controllers.CheckDoctorAvailability)
 	router.PATCH("/doctor/:id", controllers.UpdateDoctor)
 	router.DELETE("/doctor/:id", controllers.DeleteDoctor)
 	router.GET("/searchDoctorByName", controllers.SearchDoctorByName)
 
 	// Patient Routes
+	router.GET("/patients/", controllers.GetAllPatients)
 	router.POST("/patient/", controllers.CreatePatient)
 	router.GET("/patient/:id", controllers.GetPatientByID)
 	router.PATCH("/patient/:id", controllers.UpdatePatient)
